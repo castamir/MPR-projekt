@@ -23,11 +23,18 @@ nette:
         expiration: 14 days
         name: %name%
 
+    latte:
+        macros:
+            - Services\Macros\AuthMacros
+
 services:
     # alternative security storage
     nette.userStorage:
         class: Services\Storage\UserStorage
+    user:
+        class: Services\Security\User
     - Services\Security\Authenticator
+    - Services\Security\Authorizator
 
     # system services
     - App\RouterFactory

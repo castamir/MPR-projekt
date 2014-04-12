@@ -7,9 +7,13 @@ use Joseki\LeanMapper\BaseEntity;
 
 
 /**
- * @property string $name
+ * @property-read string $id
  */
 class Role extends BaseEntity
 {
 	const PROJECT_ADMIN = "Administrátor projektu";
+
+	const USER = "Uživatel";
+
+	const TEACHER = "Zkoušející";
 }

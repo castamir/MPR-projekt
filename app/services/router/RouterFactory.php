@@ -25,7 +25,7 @@ class RouterFactory
 		$router[] = $module = new RouteList('App');
 		$module[] = new Route('app/<presenter>/<action>[/<id>]', 'Homepage:default');
 		$router[] = $module = new RouteList('Admin');
-		$module[] = new Route('admin/<presenter>/<action>[/<id>]', 'Homepage:default');
+		$module[] = new Route('intranet/<presenter>/<action>[/<id>]', 'Homepage:default');
 		$router[] = $module = new RouteList('Front');
 		$module[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
 		$module[] = new Route('article/<id>', 'Article:default');

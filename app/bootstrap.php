@@ -12,7 +12,7 @@ require __DIR__ . '/../libs/composer/autoload.php';
 $configurator = new Configurator;
 
 // Enable Nette Debugger for error visualisation & logging
-$configurator->setDebugMode(TRUE);
+//$configurator->setDebugMode(TRUE);
 //$configurator->setDebugMode(FALSE);
 $configurator->enableDebugger(__DIR__ . '/../log');
 
