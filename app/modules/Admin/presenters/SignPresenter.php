@@ -4,6 +4,7 @@ namespace App\AdminModule;
 
 use App\BasePresenter as Presenter;
 use Joseki\Form\Form;
+use Joseki\LeanMapper\NotFoundException;
 use Nette\Security\AuthenticationException;
 
 
@@ -14,6 +15,20 @@ use Nette\Security\AuthenticationException;
 class SignPresenter extends Presenter
 {
 
+	/** @var \App\Tables\UzivatelRepository @inject */
+	public $userRepository;
+
+
+
+	public function actionOut()
+	{
+		$this->getUser()->logout(TRUE);
+		$this->flashMessage('Odhlášení proběhlo úspěšně.');
+		$this->redirect('in');
+	}
+
+
+
 	/**
 	 * Sign-in form factory.
 	 *
@@ -23,13 +38,13 @@ class SignPresenter extends Presenter
 	{
 		$form = new Form();
 		$form->getElementPrototype()->addAttributes(array('class' => 'login'));
-		$form->addText('username', 'Username:')->setRequired('Please enter your username.');
+		$form->addText('username', 'Uživatelské jméno:')->setRequired('Zadejte Vaše uživatelské jméno.');
 
-		$form->addPassword('password', 'Password:')->setRequired('Please enter your password.');
+		$form->addPassword('password', 'Heslo:')->setRequired('Zadejte Vaše heslo.');
 
-		$form->addCheckbox('remember', 'Keep me signed in');
+		$form->addCheckbox('remember', 'Zůstat přihlášen');
 
-		$form->addSubmit('send', 'Sign in');
+		$form->addSubmit('send', 'Přihlásit');
 
 		// call method signInFormSucceeded() on success
 		$form->onSuccess[] = $this->signInFormSucceeded;
@@ -59,11 +74,39 @@ class SignPresenter extends Presenter
 
 
 
-	public function actionOut()
+	/**
+	 * @return Form
+	 */
+	protected function createComponentReset()
 	{
-		$this->getUser()->logout(TRUE);
-		$this->flashMessage('You have been signed out.');
-		$this->redirect('in');
-	}
+		$form = new Form();
+		$form->addText('email', 'Email')
+			->addRule(Form::FILLED, 'Zajte Vaši emailovou adresu')
+			->addRule(Form::EMAIL, 'Zadejte email ve formátu john@domain.ltd');
 
+    $form->addSubmit("send", "Obnovit heslo");
+	$form->onSuccess[] = $this->resetSucceeded;
+
+	return $form;
+}
+
+
+
+	/**
+	 * @param Form $form
+	 */
+	public function resetSucceeded(Form $form)
+	{
+		try {
+			$user = $this->userRepository->findOneBy(array('email' => $form->values->email));
+		} catch (NotFoundException $e) {
+			$this->flashMessage('Neplatná nebo neexistující emailová adresa');
+			$this->redirect('this');
+		}
+
+		// TODO new password, encrypt password, save password, send email
+
+		$this->flashMessage('Na emailovou adresu ' . $form->values->email . ' bylo zasláno nové heslo.');
+		$this->redirect('this');
+	}
 }
