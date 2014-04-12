@@ -1,0 +1,11 @@
+services:
+
+    - App\Tables\RoleRepository
+    - App\Tables\CastZkouskyRepository
+    - App\Tables\HodnoceniCastiZkouskyRepository
+    - App\Tables\KomiseRepository
+    - App\Tables\PrihlasenyTerminRepository
+    - App\Tables\TerminRepository
+    - App\Tables\TypZkouskyRepository
+    - App\Tables\UzivatelRepository
+    - App\Tables\UzivatelRoleRepository
