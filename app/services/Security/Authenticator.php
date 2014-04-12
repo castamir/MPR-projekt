@@ -34,13 +34,13 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 		list($username, $password) = $credentials;
 
 		try {
-			$user = $this->userRepository->findOneBy(array("username" => $username));
+			$user = $this->userRepository->findOneBy(array("email" => $username, "aktivni" => 1));
 		} catch (NotFoundException $e) {
-			throw new Nette\Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
+			throw new Nette\Security\AuthenticationException('Neplatné uživatelské jméno nebo heslo.', self::IDENTITY_NOT_FOUND);
 		}
 
-		if (!$this->isPasswordValid($password, $user->password)) {
-			throw new Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
+		if (!$this->isPasswordValid($password, $user->heslo)) {
+			throw new Nette\Security\AuthenticationException('Neplatné uživatelské jméno nebo heslo..', self::INVALID_CREDENTIAL);
 		}
 
 		return $user;
