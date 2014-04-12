@@ -4,10 +4,10 @@
 {block topMenu}
     <div style="float: right">
         {if $user->isLoggedIn()}
-            <a n:href=":Intranet:Homepage:" class="button top">Vstup do aplikace</a>
+            <a n:href=":Admin:Homepage:" class="button top">Vstup do aplikace</a>
         {else}
-            <a n:href=":Intranet:Sign:in" class="button top">Přihlásit</a>
-            <a n:href="Register:" class="button top">Registrace</a>
+            <a n:href=":Admin:Sign:in" class="button top">Přihlásit</a>
+            <a n:href="Registration:" class="button top">Registrace</a>
         {/if}
     </div>
     {block header}{/block}

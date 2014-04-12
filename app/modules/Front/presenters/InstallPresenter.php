@@ -75,8 +75,10 @@ class InstallPresenter extends BasePresenter
 		unset ($values['heslo_znovu']);
 
 		$uzivatel = new Uzivatel($values);
+		$uzivatel->aktivni = 1;
 		$this->userRepository->persist($uzivatel);
-		$uzivatel->addToRoles(Role::PROJECT_ADMIN);
+		$uzivatel->addToRole(Role::USER);
+		$uzivatel->addToRole(Role::PROJECT_ADMIN);
 		$this->userRepository->persist($uzivatel);
 		$this->redirect('this');
 	}

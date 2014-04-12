@@ -10,6 +10,7 @@ use WebLoader\Nette\JavaScriptLoader;
 
 /**
  * Base presenter for all application presenters.
+ * @property-read \Services\Security\User $user
  */
 class BasePresenter extends Presenter
 {

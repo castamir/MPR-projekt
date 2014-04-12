@@ -5,7 +5,7 @@
     <meta name="description" content="">
     <meta name="robots" content="{$robots}" n:ifset="$robots">
 
-    <title>{block title|striptags}Sandbox{/block}</title>
+    <title>{block title|striptags}Ověření profesní kvalifikace{/block}</title>
 
     {control css}
     {block layoutStyles}{/block}
@@ -21,6 +21,8 @@
 <body>
     <script> document.documentElement.className += ' js' </script>
 
+    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+
     {block main}
         <div id="site">
             <div id="main">
@@ -29,7 +31,7 @@
                 <div id="content">{block content}{/block}</div>
                 <div class="clear"></div>
             </div>
-            <footer>Copyright © {=date("Y")}, Paulík Miroslav</footer>
+            <footer>Copyright © {=date("Y")}, SmartCrew, FIT VUT v Brně</footer>
         </div>
     {/block}
 

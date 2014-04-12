@@ -1,6 +1,6 @@
 {block main}
     <header>{include #topMenu}</header>
-    <h1 class="dominant">Administrace</h1>
+    <h1 class="dominant">Ověření profesní kvalifikace</h1>
     <div class="container">
         <div class="form-bg">
             {form signInForm}
@@ -12,6 +12,7 @@
                     {input send class => button}
                 </p>
             {/form}
+            <p><a n:href="passwordRecovery">Obnovit zapomenuté heslo</a></p>
         </div>
     </div>
 {/block}

@@ -7,6 +7,26 @@
     {block header}{/block}
 {/block}
 
-{block menu}{/block}
+{block menu}
+    <menu>
+        <li n:auth=":Admin:Applicant:default">Absolvování zkoušek
+            <ul>
+                <li><a n:href="this">Moje zkoušky</a></li>
+                <li><a n:href="this">Aktuální zkoušky</a></li>
+            </ul>
+        </li>
+        <li n:auth=":Admin:Terms:default"><a n:href="this">Plán zkoušek</a></li>
+        <li n:auth=":Admin:Examiner:default">Hodnocení zkoušek
+            <ul>
+                <li><a n:href="this">Moje zkoušky</a></li>
+                <li><a n:href="this">Výsledky zkoušek</a></li>
+                <li><a n:href="this">Žadatelé</a></li>
+            </ul>
+        </li>
+        <li n:auth=":Admin:Payments:default"><a n:href="this">Platby</a></li>
+        <li n:auth=":Admin:Exams:default"><a n:href="this">Správa zkoušek</a></li>
+        <li n:auth=":Admin:Settings:default"><a n:href="this">Nastavení účtu</a></li>
+    </menu>
+{/block}
 
 
