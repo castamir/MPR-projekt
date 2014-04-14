@@ -1,23 +1,44 @@
 {define cell-zacatek}
-{$row->termin->zacatek|date:"d.m.Y H:i"}
+{if $row instanceof \App\Tables\PrihlasenyTermin}
+    {$row->termin->zacatek|date:"d.m.Y H:i"}
+{elseif $row instanceof \App\Tables\Termin}
+    {$row->zacatek|date:"d.m.Y H:i"}
+{/if}
 {/define}
 
-{define cell-typ}
-{$row->termin->typZkousky->nazev}
+{define cell-typZkousky}
+{if $row instanceof \App\Tables\PrihlasenyTermin}
+    {$row->termin->typZkousky->nazev}
+{elseif $row instanceof \App\Tables\Termin}
+    {$row->typZkousky->nazev}
+{/if}
+{/define}
+
+{define cell-kapacita}
+{count($row->prihlaseno)} / {$row->kapacita}
+{/define}
+
+{define cell-cena}
+{$row->cena|number:2:',':' '} Kč
 {/define}
 
 {define cell-datumSplatnosti}
-    {if $row->zaplaceno}
-        Zaplaceno
-    {else}
-        {$row->datumSplatnosti|date:"d.m.Y"}
-    {/if}
+{if $row->zaplaceno}
+    Zaplaceno
+{else}
+    {$row->datumSplatnosti|date:"d.m.Y"}
+{/if}
 {/define}
 
 {define cell-akce}
-    <a n:href="this">Odhlásit</a>
+    <a href="{plink :Admin:Exams:detail, $row->termin->id}">Detail</a>
+    <a href="{plink :Admin:Applicant:signOut, $row->termin->id}">Odhlásit</a>
+{/define}
+
+{define cell-prihlasit}
+    <a href="{plink :Admin:Applicant:signIn, $row->id}">Přihlásit</a>
 {/define}
 
 {define cell-hodnoceni}
-    Prospěl
+{$row->getCelkoveHodnoceni()}
 {/define}

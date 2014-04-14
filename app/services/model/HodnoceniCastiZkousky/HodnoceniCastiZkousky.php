@@ -12,13 +12,33 @@ use Joseki\LeanMapper\BaseEntity;
  * @property TypZkousky $typZkousky m:hasOne
  * @property CastZkousky $castZkousky m:hasOne
  * @property DateTime $hodnocenoDne
- * @property int $body
+ * @property int|NULL $body
  */
 class HodnoceniCastiZkousky extends BaseEntity
 {
+	const SUCCESS = 'Prospěl';
+
+	const FAILED = 'Neprospěl';
+
+	const PENDING = 'Nezadáno';
+
+
+
 	protected function initDefaults()
 	{
 		$this->hodnocenoDne = new DateTime();
-		$this->body = 0;
+	}
+
+
+
+	public function getVysledek()
+	{
+		if (is_null($this->body)) {
+			return self::PENDING;
+		}
+		if ($this->body < $this->castZkousky->minBodu) {
+			return self::FAILED;
+		}
+		return self::SUCCESS;
 	}
 }

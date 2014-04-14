@@ -23,12 +23,19 @@ class PrihlasenyTerminRepository extends Repository
 	 */
 	public function getMyExams($filters = array(), $order = array())
 	{
-		return $this->createQueryObject()
+		$query = $this->createQueryObject()
 			->removeClause('select')->select($this->getTable() . '.*')
 			->join('termin')->on('termin.id = ' . $this->getTable() . '.termin')
 			->where($filters)
 			->where('termin.zacatek > %t', new DateTime());
+		if (count($order)) {
+			$query->orderBy(implode(" ", $order));
+		}
+		return $query;
 	}
+
+
+
 	/**
 	 * @param array $filters
 	 * @param array $order
@@ -36,10 +43,14 @@ class PrihlasenyTerminRepository extends Repository
 	 */
 	public function getdoneExams($filters = array(), $order = array())
 	{
-		return $this->createQueryObject()
+		$query = $this->createQueryObject()
 			->removeClause('select')->select($this->getTable() . '.*')
 			->join('termin')->on('termin.id = ' . $this->getTable() . '.termin')
 			->where($filters)
 			->where('termin.zacatek < %t', new DateTime());
+		if (count($order)) {
+			$query->orderBy(implode(" ", $order));
+		}
+		return $query;
 	}
 }

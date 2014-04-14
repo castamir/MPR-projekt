@@ -10,6 +10,7 @@ use Joseki\LeanMapper\BaseEntity;
 /**
  * @property Uzivatel $zodpovednaOsoba m:hasOne(zodpovedna_osoba:Uzivatel)
  * @property TypZkousky $typZkousky m:hasOne
+ * @property PrihlasenyTermin[] $prihlaseno m:hasMany(:prihlaseny_termin:termin:prihlaseny_termin)
  * @property string $cisloUctu
  * @property string|NULL $poznamka
  * @property int $kapacita
@@ -19,13 +20,5 @@ use Joseki\LeanMapper\BaseEntity;
  */
 class Termin extends BaseEntity
 {
-	public function init()
-	{
-		$this->cena;
-		$this->kapacita;
-		$this->poznamka;
-		$this->cisloUctu;
-		$this->vychoziDatumSplatnosti;
-		$this->zacatek;
-	}
+
 }

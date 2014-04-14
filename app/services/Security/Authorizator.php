@@ -57,6 +57,9 @@ class Authorizator extends Object implements IAuthorizator
 				switch ($resource) {
 					case ":Admin:Applicant:":
 					case ":Admin:Applicant:myExams":
+					case ":Admin:Applicant:newExams":
+					case ":Admin:Applicant:signIn":
+					case ":Admin:Applicant:signOut":
 						return TRUE;
 				}
 			}
