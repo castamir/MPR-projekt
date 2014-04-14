@@ -35,6 +35,6 @@ interface IAuthorizator
 	 * @param  string  privilege
 	 * @return bool
 	 */
-	function isAllowed($role, $resource, $privilege);
+	function isAllowed($role, $resource, $resourceType);
 
 }

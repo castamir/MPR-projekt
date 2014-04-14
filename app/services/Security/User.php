@@ -39,10 +39,10 @@ class User extends Usr
 	 * Has a user effective access to the Resource?
 	 * If $resource is NULL, then the query applies to all resources.
 	 * @param null $resource
-	 * @param null $privilege
+	 * @param null|string $privilege
 	 * @return bool
 	 */
-	public function isAllowed($resource = IAuthorizator::ALL, $privilege = IAuthorizator::ALL)
+	public function isAllowed($resource = IAuthorizator::ALL, $privilege = Authorizator::PRESENTER)
 	{
 		foreach ($this->getRoles() as $role) {
 			if ($this->getAuthorizator()->isAllowed($role, $resource, $privilege)) {

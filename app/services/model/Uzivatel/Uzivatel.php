@@ -24,6 +24,7 @@ use Nette\Security\IIdentity;
  * @property string|NULL $vzdelani
  * @property string|NULL $adresaTp
  * @property string|NULL $adresaKorespondencni
+ * @property PrihlasenyTermin[] $zkousky m:hasMany
  */
 class Uzivatel extends BaseEntity implements IIdentity
 {

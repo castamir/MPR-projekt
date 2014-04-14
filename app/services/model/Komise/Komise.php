@@ -7,7 +7,8 @@ use Joseki\LeanMapper\BaseEntity;
 
 
 /**
- * @property int $id
+ * @property Uzivatel $uzivatel
+ * @property Termin $trmin
  */
 class Komise extends BaseEntity
 {

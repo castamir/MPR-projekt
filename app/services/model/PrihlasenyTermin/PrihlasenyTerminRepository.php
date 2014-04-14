@@ -2,7 +2,9 @@
 
 namespace App\Tables;
 
+use Joseki\LeanMapper\Query;
 use Joseki\LeanMapper\Repository;
+use DateTime;
 
 
 
@@ -14,5 +16,30 @@ use Joseki\LeanMapper\Repository;
  */
 class PrihlasenyTerminRepository extends Repository
 {
-
+	/**
+	 * @param array $filters
+	 * @param array $order
+	 * @return Query
+	 */
+	public function getMyExams($filters = array(), $order = array())
+	{
+		return $this->createQueryObject()
+			->removeClause('select')->select($this->getTable() . '.*')
+			->join('termin')->on('termin.id = ' . $this->getTable() . '.termin')
+			->where($filters)
+			->where('termin.zacatek > %t', new DateTime());
+	}
+	/**
+	 * @param array $filters
+	 * @param array $order
+	 * @return Query
+	 */
+	public function getdoneExams($filters = array(), $order = array())
+	{
+		return $this->createQueryObject()
+			->removeClause('select')->select($this->getTable() . '.*')
+			->join('termin')->on('termin.id = ' . $this->getTable() . '.termin')
+			->where($filters)
+			->where('termin.zacatek < %t', new DateTime());
+	}
 }

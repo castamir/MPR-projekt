@@ -26,6 +26,8 @@ nette:
     latte:
         macros:
             - Services\Macros\AuthMacros
+            - Nextras\Forms\Bridges\Latte\Macros\BS3InputMacros
+            - Nextras\Latte\Macros\RedefineMacro
 
 services:
     # alternative security storage

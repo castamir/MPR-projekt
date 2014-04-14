@@ -1,0 +1,23 @@
+{define cell-zacatek}
+{$row->termin->zacatek|date:"d.m.Y H:i"}
+{/define}
+
+{define cell-typ}
+{$row->termin->typZkousky->nazev}
+{/define}
+
+{define cell-datumSplatnosti}
+    {if $row->zaplaceno}
+        Zaplaceno
+    {else}
+        {$row->datumSplatnosti|date:"d.m.Y"}
+    {/if}
+{/define}
+
+{define cell-akce}
+    <a n:href="this">Odhlásit</a>
+{/define}
+
+{define cell-hodnoceni}
+    Prospěl
+{/define}

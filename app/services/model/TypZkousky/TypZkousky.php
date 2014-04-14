@@ -7,7 +7,10 @@ use Joseki\LeanMapper\BaseEntity;
 
 
 /**
- * @property int $id
+ * @property int $aktivni
+ * @property string $nazev
+ * @property string $kod
+ * @property string $popis
  */
 class TypZkousky extends BaseEntity
 {

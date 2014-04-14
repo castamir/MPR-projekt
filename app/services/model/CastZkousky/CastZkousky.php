@@ -7,7 +7,7 @@ use Joseki\LeanMapper\BaseEntity;
 
 
 /**
- * @property int $id
+ * @property string $nazev
  */
 class CastZkousky extends BaseEntity
 {

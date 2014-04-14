@@ -29,4 +29,23 @@ $configurator->createRobotLoader()
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $container = $configurator->createContainer();
 
+function getNextrasDemosSource($path)
+{
+	$file = __DIR__ . '/../libs/composer/nextras/' . $path;
+	if (!file_exists($file)) {
+		throw new \Nette\FileNotFoundException("File '$file' not found.");
+	}
+	return $file;
+}
+
+function getNextrasDemosSourceWeb($path)
+{
+	$file = __DIR__ . '/../libs/composer/nextras/' . $path;
+	if (!file_exists($file)) {
+		throw new \Nette\FileNotFoundException("File '$file' not found.");
+	}
+	return '/../libs/composer/nextras/' . $path;
+}
+
+
 return $container;

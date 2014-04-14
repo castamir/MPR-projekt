@@ -595,7 +595,7 @@ class Permission extends Nette\Object implements IAuthorizator
 	 * @throws Nette\InvalidStateException
 	 * @return bool
 	 */
-	public function isAllowed($role = self::ALL, $resource = self::ALL, $privilege = self::ALL)
+	public function isAllowed($role = self::ALL, $resource = self::ALL, $resourceType = self::ALL)
 	{
 		$this->queriedRole = $role;
 		if ($role !== self::ALL) {
@@ -615,14 +615,14 @@ class Permission extends Nette\Object implements IAuthorizator
 
 		do {
 			// depth-first search on $role if it is not 'allRoles' pseudo-parent
-			if ($role !== NULL && NULL !== ($result = $this->searchRolePrivileges($privilege === self::ALL, $role, $resource, $privilege))) {
+			if ($role !== NULL && NULL !== ($result = $this->searchRolePrivileges($resourceType === self::ALL, $role, $resource, $resourceType))) {
 				break;
 			}
 
-			if ($privilege === self::ALL) {
+			if ($resourceType === self::ALL) {
 				if ($rules = $this->getRules($resource, self::ALL)) { // look for rule on 'allRoles' psuedo-parent
-					foreach ($rules['byPrivilege'] as $privilege => $rule) {
-						if (self::DENY === ($result = $this->getRuleType($resource, NULL, $privilege))) {
+					foreach ($rules['byPrivilege'] as $resourceType => $rule) {
+						if (self::DENY === ($result = $this->getRuleType($resource, NULL, $resourceType))) {
 							break 2;
 						}
 					}
@@ -631,7 +631,7 @@ class Permission extends Nette\Object implements IAuthorizator
 					}
 				}
 			} else {
-				if (NULL !== ($result = $this->getRuleType($resource, NULL, $privilege))) { // look for rule on 'allRoles' pseudo-parent
+				if (NULL !== ($result = $this->getRuleType($resource, NULL, $resourceType))) { // look for rule on 'allRoles' pseudo-parent
 					break;
 
 				} elseif (NULL !== ($result = $this->getRuleType($resource, NULL, NULL))) {
